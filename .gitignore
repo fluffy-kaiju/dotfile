@@ -1,13 +1,4 @@
 /**
 !.gitignore
 
-!.config/
-
-!.config/hypr
-!.config/hypr/**
-
-!.config/flameshot
-!.config/flameshot/**
-
-!.config/discord
-!.config/discord/disable-force-update.md
+!readme.md
