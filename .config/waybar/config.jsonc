@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "position": "left",
+    "position": "right",
     "reload_style_on_change": true,
     "width": 4,
     "margin-left": 0,
@@ -134,7 +134,8 @@
             "",
             "",
             ""
-        ]
+        ],
+        "format-plugged": "󰚥\n{capacity}%",
         // "format-icons": [
         //     "󰂎",
         //     "󰁺",
