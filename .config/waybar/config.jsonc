@@ -16,21 +16,21 @@
         "hyprland/workspaces"
         // "hyprland/window"
     ],
-    // "modules-center": [
+    "modules-center": [
     // "custom/network_traffic"
-    // ],
+        "cpu",
+        "memory",
+        "custom/updates",
+    ],
     "modules-right": [
-        // "custom/updates",
-        "backlight",
         // "custom/keyboard-layout",
         // "temperature",
-        // "cpu",
-        // "memory",
-        "battery",
         "pulseaudio",
+        "backlight",
         // "network",
-        "tray",
         "idle_inhibitor",
+        "tray",
+        "battery",
         "clock",
         "custom/power"
     ],
@@ -90,11 +90,11 @@
         "on-click": "xdg-open https://calendar.google.com/"
     },
     "cpu": {
-        "format": "🖳\n{usage}%",
+        "format": " 🖳\n{usage}%",
         "on-click": "foot -e htop"
     },
     "memory": {
-        "format": "🖴\n{:>3}%",
+        "format": " 🖴\n{}%",
         "on-click": "foot -e htop"
     },
     "temperature": {
