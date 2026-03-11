@@ -12,6 +12,11 @@
     text-shadow: none;
 }
 
+#window {
+        padding: 8px 4px;
+
+}
+
 window#waybar {
     background-color: alpha(@color0, 0.7);
     padding: 0;

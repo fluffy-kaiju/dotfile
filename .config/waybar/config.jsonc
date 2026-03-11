@@ -57,11 +57,11 @@
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
     },
-    "hyprland/window": {
-        "format": "",
-        "icon": true,
-        "icon-size": 20
-    },
+    // "hyprland/window": {
+    //     "format": "",
+    //     "icon": true,
+    //     "icon-size": 20
+    // },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -86,7 +86,8 @@
     "clock": {
         "format": "{:%H:%M\n%d/%m}",
         //"rotate": 90,
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "xdg-open https://calendar.google.com/"
     },
     "cpu": {
         "format": "🖳\n{usage}%",
@@ -122,20 +123,22 @@
         "on-click": "~/.config/waybar/scripts/backlight-hint.sh"
     },
     "battery": {
+        "on-click": "footclient battop",
+	"tooltip": false,
         "states": {
-            // "good": 95,
+            "good": 95,
             "warning": 30,
             "critical": 15
         },
         "format": "{capacity}%",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ],
         "format-plugged": "󰚥\n{capacity}%",
+        //"format-icons": [
+        //    "",
+        //    "",
+        //    "",
+        //    "",
+        //    ""
+        //],
         // "format-icons": [
         //     "󰂎",
         //     "󰁺",
