@@ -9,5 +9,8 @@
 !.config/flameshot
 !.config/flameshot/**
 
+!.config/waybar
+!.config/waybar/**
+
 !.config/discord
 !.config/discord/disable-force-update.md
