@@ -13,27 +13,15 @@
     // Choose the order of the modules
     // Add according to your wishes: "custom/weather"
     "modules-left": [
-        // "custom/launcher",
         "hyprland/workspaces"
-        // "hyprland/window"
     ],
-    // "modules-center": [
-    //     // "custom/network_traffic"
-    //     "cpu",
-    //     "memory"
-    //     // "custom/updates"y,
-    // ],
     "modules-right": [
-        // "custom/keyboard-layout",
-        // "temperature",
         "pulseaudio",
         "backlight",
-        // "network",
         "idle_inhibitor",
         "tray",
         "battery",
         "clock"
-        // "custom/power"
     ],
     // Modules configuration
     "hyprland/workspaces": {
@@ -78,21 +66,6 @@
         "format": "{:%H:%M\n%d/%m}",
         "tooltip": false,
         "on-click": "xdg-open https://calendar.google.com/"
-    },
-    "cpu": {
-        "format": " 🖳\n{usage}%",
-        "on-click": "foot -e btop"
-    },
-    "memory": {
-        "format": " 🖴\n{}%",
-        "on-click": "foot -e btop"
-    },
-    "temperature": {
-        "thermal-zone": 7, // Check with: # cat /sys/class/hwmon/hwmon*/temp1_input
-        "hwmon-path": "/sys/class/hwmon/hwmon7/temp1_input",
-        "critical-threshold": 80,
-        "format-critical": "{temperatureC}°C ",
-        "format": "{temperatureC}°C "
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -142,79 +115,11 @@
             "󰂂",
             "󰁹"
         ],
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        //"format-icons": ["", "", "", "", "", "", "", "", "", ""]
-        //"format": "&#x202b;{icon}&#x202c; {capacity}%",
-        //"format-icons": ["ﱉ","ﱊ","ﱌ","ﱍ","ﱋ"]
-    },
-    // "battery": {
-    //     "states": {
-    //         "good": 60,
-    //         "warning": 30,
-    //         "critical": 15
-    //     },
-    //     "format": "{icon}",
-    //     "format-alt": " {icon}\n{capacity}",
-    //     "format-plugged": "{󰂄}",
-    //     "format-icons": [
-    //         "󰂎",
-    //         "󰁺",
-    //         "󰁻",
-    //         "󰁼",
-    //         "󰁽",
-    //         "󰁾",
-    //         "󰁿",
-    //         "󰂀",
-    //         "󰂁",
-    //         "󰂂",
-    //         "󰁹"
-    //     ],
-    //     "tooltip": false
-    // },
-    "network": {
-        //"interface": "wlp0s20f3", // (Optional) To force the use of this interface  "format-wifi": "  {essid}",
-        "format": "⚠Disabled",
-        "format-wifi": "",
-        "format-ethernet": "",
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "⚠Disabled",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "family": "ipv4",
-        "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
-        "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
-        //"min-length": 2,
-        //"max-length": 2,
-        "on-click": "nm-connection-editor"
-    },
-    "custom/updates": {
-        "format": "{}{icon}",
-        "return-type": "json",
-        "format-icons": {
-            "has-updates": "󱍷",
-            "updated": "󰂪",
-        },
-        "exec-if": "which waybar-module-pacman-updates",
-        "exec": "waybar-module-pacman-updates --interval-seconds 5 --network-interval-seconds 7200 --network-interval-seconds",
-        "on-click": "foot -e update"
     },
     "custom/power": {
         "format": "⏻",
         "on-click": "nwgbar",
         "tooltip": false,
-    },
-    "custom/keyboard-layout": {
-        "format": " Cheat" // Icon: keyboard
-    },
-    "custom/launcher": {
-        "format": "    ",
-        "on-click": "exec nwg-drawer -c 7 -is 70 -spacing 23",
-        "tooltip": false,
-    },
-    "custom/network_traffic": {
-        "exec": "~/.config/waybar/scripts/network_traffic.sh",
-        "return-type": "json",
-        "format-ethernet": "{icon} {ifname} ⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}", // optional
     },
     "pulseaudio": {
         "justify": "center",
@@ -243,11 +148,5 @@
         "on-click": "pavucontrol",
         "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ -1%",
         "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ +1%",
-    },
-    // https://github.com/chubin/wttr.in
-    "custom/weather": {
-        "exec": "curl 'https://wttr.in/Essen?format=2'",
-        "interval": 900,
-        "on-click": "yad --html --uri='https://wttr.in/Essen' --center --fixed --width=1000 --height=680 --timeout=60 --timeout-indicator=right"
     },
 }
