@@ -99,7 +99,10 @@ window#waybar {
     opacity: 1;
 }
 
-#battery.charging,
+#battery.charging {
+
+    color: #28f46f;
+}
 #battery.good:not(.charging),
 #battery.warning:not(.charging),
 #battery.critical:not(.charging) {
