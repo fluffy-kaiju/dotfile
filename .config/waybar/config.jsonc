@@ -53,8 +53,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "󰈈",
-            "deactivated": "",
+            "activated": "󰌵",
+            "deactivated": "󰌶",
         },
         "on-click": "exec ~/.config/hypr/scripts/idle_inhibitor.sh",
     },
@@ -69,7 +69,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{icon}",
+        "format": "<span size='x-large' font='FiraCode Nerd Font Mono'>{icon}</span>\n{percent}",
         "format-icons": [
             "",
             "󰪞",
