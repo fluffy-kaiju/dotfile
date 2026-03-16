@@ -11,3 +11,6 @@
 
 !.config/discord
 !.config/discord/disable-force-update.md
+
+!.config/doom
+!.config/doom/**
