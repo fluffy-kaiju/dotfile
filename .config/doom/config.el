@@ -73,3 +73,68 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(defvar my-schemastore-catalog-url "https://www.schemastore.org/api/json/catalog.json")
+(defvar my-schemastore-catalog-file (expand-file-name "schema-store-catalog.json" user-emacs-directory))
+
+(defun my-update-json-schemas ()
+  "Download the latest JSON Schema Store catalog manually."
+  (interactive)
+  (message "Downloading SchemaStore catalog...")
+  (url-copy-file my-schemastore-catalog-url my-schemastore-catalog-file t)
+  (message "SchemaStore catalog updated! Restart Eglot to apply changes."))
+
+(defun my-load-json-schemas ()
+  "Read the downloaded SchemaStore catalog and return the schemas array."
+  (when (file-exists-p my-schemastore-catalog-file)
+    (let* ((json-object-type 'plist)
+           (json-array-type  'vector)
+           (json-key-type    'keyword)
+           (catalog (json-read-file my-schemastore-catalog-file)))
+      (plist-get catalog :schemas))))
+
+;; Your existing Tramp config
+(setq enable-remote-dir-locals t)
+
+(after! tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+
+(after! eglot
+  ;; 1. (Optional) Ensure catalog exists
+  (unless (file-exists-p my-schemastore-catalog-file)
+    (my-update-json-schemas))
+
+  ;; 2. Combine configs
+  (let ((prisma-config '(:prisma []))
+        (yaml-config '(:yaml (:schemaStore (:enable t) :format (:enable t))))
+        ;; Use a backtick here so the comma can trigger the function call
+        (json-schemas `(:json (:format (:enable t)
+                               :validate (:enable t)
+                               :schemas ,(my-load-json-schemas)))))
+
+    (setq-default eglot-workspace-configuration
+                  `(,@prisma-config
+                    ,@yaml-config
+                    ,@json-schemas)))) ; Use ,@ because json-schemas is now a full lirt
+(use-package! eldoc-box
+  :hook (eglot-managed-mode . eldoc-box-hover-at-point-mode)
+  :config
+  (setq eldoc-box-max-pixel-width 500
+        eldoc-box-max-pixel-height 300))
+(setq eldoc-display-functions (delete 'eldoc-display-in-echo-area eldoc-display-functions))
+
+(use-package! elcord
+  :config
+  ;; Enable elcord globally
+  (elcord-mode 1))
+  ;; You can also use dolist here if you have multiple to add:
+(dolist (mode '(
+                (js-ts-mode . "javascript-mode_icon")
+                (typescript-ts-mode . "typescript-mode_icon")
+                ))
+    (add-to-list 'elcord-mode-icon-alist mode))
+
+;; (dolist (text '(
+;;                 (js-ts-mode . "javascript-mode_icon")
+;;                 ))
+    ;; (add-to-list 'elcord-mode-text-alist text)))
