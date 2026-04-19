@@ -53,5 +53,17 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
-(package! example-package
+(package! devcontainer
   :recipe (:host github :repo "johannes-mueller/devcontainer.el"))
+
+(package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
+
+(package! eldoc-box)
+
+(package! elcord
+  :recipe (:host github
+           :repo "Mstrodl/elcord"))
+
+(package! platformio-mode
+  :recipe (:host github
+           :repo "ZachMassia/PlatformIO-Mode"))

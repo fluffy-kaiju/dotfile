@@ -21,6 +21,7 @@
         "idle_inhibitor",
         "tray",
         "battery",
+	"custom/batt_power",
         "clock"
     ],
     // Modules configuration
@@ -115,6 +116,11 @@
             "󰂂",
             "󰁹"
         ],
+    },
+    "custom/batt_power": {
+        "format": "{text}W",
+	"exec": "$HOME/.config/waybar/script/batt.sh",
+	"interval": 5,
     },
     "custom/power": {
         "format": "⏻",
