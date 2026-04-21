@@ -99,6 +99,16 @@
 (after! tramp
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
+(use-package! prisma-mode
+  :mode "\\.prisma\\'"
+  :config
+  ;; Register the prisma server with eglot
+  ;; (set-eglot-client! 'prisma-mode '("prisma-language-server" "--stdio"))
+  (set-eglot-client! 'prisma-mode '("/home/dev/.local/share/pnpm/prisma-language-server" "--stdio"))
+  ;; Ensure eglot starts automatically when opening prisma files
+  (add-hook 'prisma-mode-hook #'eglot-ensure))
+
+
 (after! eglot
   ;; 1. (Optional) Ensure catalog exists
   (unless (file-exists-p my-schemastore-catalog-file)
@@ -115,11 +125,11 @@
     (setq-default eglot-workspace-configuration
                   `(,@prisma-config
                     ,@yaml-config
-                    ,@json-schemas)))
+                    ,@json-schemas))))
   ;; (add-to-list 'eglot-server-programs
   ;;               '(dockerfile-mode . ("" "--stdio"))
   ;;              )
-  ) ; Use ,@ because json-schemas is now a full lirt
+   ; Use ,@ because json-schemas is now a full lirt
 
 (setq jsonrpc-default-request-timeout 60) ; Increase to 30 seconds
 (after! eglot
@@ -138,8 +148,8 @@
   ;; You can also use dolist here if you have multiple to add:
 (dolist (mode '(
                 (js-ts-mode . "javascript-mode_icon")
-                (typescript-ts-mode . "typescript-mode_icon")
-                ))
+                (typescript-ts-mode . "typescript-mode_icon")))
+                
     (add-to-list 'elcord-mode-icon-alist mode))
 
 ;; (dolist (text '(
