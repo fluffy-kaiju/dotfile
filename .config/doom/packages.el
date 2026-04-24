@@ -67,3 +67,6 @@
 (package! platformio-mode
   :recipe (:host github
            :repo "ZachMassia/PlatformIO-Mode"))
+
+;; llm mcp tools fot gptel
+(package! mcp)

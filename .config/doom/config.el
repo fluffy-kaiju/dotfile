@@ -141,15 +141,28 @@
         eldoc-box-max-pixel-height 300))
 (setq eldoc-display-functions (delete 'eldoc-display-in-echo-area eldoc-display-functions))
 
-(use-package! elcord
+(use-package elcord
   :config
-  ;; Enable elcord globally
-  (elcord-mode 1))
+  (elcord-mode -1)
+
+  (add-hook 'server-after-make-frame-hook
+            (lambda ()
+              (unless elcord-mode
+                (elcord-mode 1))))
+
+  (add-hook 'delete-frame-functions
+            (lambda (_frame)
+              (when (and (daemonp)
+                         (<= (length (frame-list)) 2))
+                (elcord-mode -1)))))
+;; (use-package! elcord
+;;   :config
+;;   ;; Enable elcord globally
+;;   (elcord-mode 1))
   ;; You can also use dolist here if you have multiple to add:
 (dolist (mode '(
                 (js-ts-mode . "javascript-mode_icon")
                 (typescript-ts-mode . "typescript-mode_icon")))
-                
     (add-to-list 'elcord-mode-icon-alist mode))
 
 ;; (dolist (text '(
@@ -164,3 +177,15 @@
 (add-hook 'c++-mode-hook (lambda ()
                            (eglot-ensure)
                            (platformio-conditionally-enable)))
+
+;; change splash image
+;; image from https://kefirvorob.carrd.co/#
+(setq fancy-splash-image "/home/fluffy/Pictures/Wallpaper/discord-avatar-fluffy_kaiju.png")
+
+;; remove github link
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
+
+(gptel-make-gh-copilot "Copilot")
+;; OPTIONAL configuration
+(setq gptel-model 'claude-sonnet-4.6
+      gptel-backend (gptel-make-gh-copilot "Copilot"))
