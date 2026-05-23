@@ -70,3 +70,14 @@
 
 ;; llm mcp tools fot gptel
 (package! mcp)
+
+
+(package! docker-compose-mode)
+
+;; Install gptel tools for emacs
+(package! llm-tool-collection :recipe (:host github :repo "skissue/llm-tool-collection"))
+
+
+(package! zoom)
+
+(package! ox-gfm)

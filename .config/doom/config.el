@@ -126,10 +126,10 @@
                   `(,@prisma-config
                     ,@yaml-config
                     ,@json-schemas))))
-  ;; (add-to-list 'eglot-server-programs
-  ;;               '(dockerfile-mode . ("" "--stdio"))
-  ;;              )
-   ; Use ,@ because json-schemas is now a full lirt
+;; (add-to-list 'eglot-server-programs
+;;               '(dockerfile-mode . ("" "--stdio"))
+;;              )
+                                        ; Use ,@ because json-schemas is now a full lirt
 
 (setq jsonrpc-default-request-timeout 60) ; Increase to 30 seconds
 (after! eglot
@@ -159,16 +159,19 @@
 ;;   :config
 ;;   ;; Enable elcord globally
 ;;   (elcord-mode 1))
-  ;; You can also use dolist here if you have multiple to add:
+;; You can also use dolist here if you have multiple to add:
 (dolist (mode '(
                 (js-ts-mode . "javascript-mode_icon")
-                (typescript-ts-mode . "typescript-mode_icon")))
-    (add-to-list 'elcord-mode-icon-alist mode))
+                (typescript-ts-mode . "typescript-mode_icon")
+                (dockerfile-mode . "dockerfile-mode_icon")
+                (dockerfile-ts-mode . "dockerfile-mode_icon")
+                (docker-compose-mode . "dockerfile-mode_icon")))
+  (add-to-list 'elcord-mode-icon-alist mode))
 
 ;; (dolist (text '(
 ;;                 (js-ts-mode . "javascript-mode_icon")
 ;;                 ))
-    ;; (add-to-list 'elcord-mode-text-alist text)))
+;; (add-to-list 'elcord-mode-text-alist text)))
 
 (use-package! platformio-mode)
 
@@ -180,12 +183,61 @@
 
 ;; change splash image
 ;; image from https://kefirvorob.carrd.co/#
-(setq fancy-splash-image "/home/fluffy/Pictures/Wallpaper/discord-avatar-fluffy_kaiju.png")
+(setq fancy-splash-image "/home/fluffy/Pictures/Wallpaper/gnu.png")
 
 ;; remove github link
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
 
 (gptel-make-gh-copilot "Copilot")
 ;; OPTIONAL configuration
-(setq gptel-model 'claude-sonnet-4.6
-      gptel-backend (gptel-make-gh-copilot "Copilot"))
+(setq gptel-model 'gemini-3.1-pro-preview
+      gptel-backend (gptel-make-gh-copilot "Copilot")
+      gptel-tools (mapcar (apply-partially #'apply #'gptel-make-tool) (llm-tool-collection-get-all)))
+
+
+
+
+(use-package! zone
+  :config
+  (zone-when-idle (* 60 15)))
+
+;; (setq scroll-margin 8)
+
+(map! :n "M-j" #'evil-scroll-line-down
+      :n "M-k" #'evil-scroll-line-up)
+
+(use-package! zoom
+  :config
+  (zoom-mode 1)
+  ;; Optional: Customize the size ratio (0.75 means 75% of the frame)
+  (setq zoom-size '(0.75 . 0.75))
+  ;; Optional: Don't zoom if there's only one window
+  (setq zoom-only-if-two-or-more t)
+
+;; (after! apheleia
+;;   ;; Force Apheleia to run formatters inside the container/remote host
+;;   (setq apheleia-remote-algorithm 'remote))
+
+;; (after! dape
+;;   (add-to-list 'dape-configs
+;;                `(js-debug-node
+;;                  host "127.0.0.1"
+;;                  port 4711
+;;                  type "pwa-node"
+;;                  request "attach"
+;;                  address "localhost"
+;;                  fn (dape-config-tramp) ; <--- Parsed natively by dape here
+;;                  :sourceMaps t)))
+ (add-to-list 'dape-configs
+  `(nestjs-attach
+    modes (js-mode js-ts-mode typescript-mode typescript-ts-mode)
+    host "127.0.0.1"
+    port 4711
+    fn (dape-config-tramp) ; <--- Parsed natively by dape here
+    :type "pwa-node"
+    :request "attach"
+    :host "127.0.0.1"
+    :port 9229
+    :sourceMaps t
+    :outFiles ["/workplaces/dist/**/*.js"]
+    :skipFiles ["<node_internals>/**" "**/node_modules/**"])))

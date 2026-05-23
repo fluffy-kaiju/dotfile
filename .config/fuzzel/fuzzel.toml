@@ -1,0 +1,21 @@
+font="Noto Sans Mono"
+prompt="~UwU~ -> "
+
+[colors]
+background=324D64b3
+text=BBBBBBFF
+match=f5f5f5ff
+selection-match=f5f5f5ff
+selection=628Db4B3
+selection-text=BBBBBBFF
+input=f5f5f5ff
+prompt=f5f5f5ff
+
+[border]
+width=0
+radius=16
+
+[key-bindings]
+delete-line-forward=Control+Shift+Delete
+next-with-wrap=Control+j
+prev-with-wrap=Control+k

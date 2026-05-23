@@ -17,3 +17,9 @@
 
 !.config/doom
 !.config/doom/**
+
+!.config/darkman
+!.config/darkman/**
+
+!.config/fuzzel
+!.config/fuzzel/**

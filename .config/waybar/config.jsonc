@@ -1,158 +1,163 @@
 {
-    "layer": "top",
-    "position": "right",
-    "no-center": true,
-    "reload_style_on_change": true,
-    "width": 4,
-    "margin-left": 0,
-    "margin-right": 0,
-    "margin-top": 0,
-    "margin-bottom": 0,
-    "spacing": 0,
-    "gtk-layer-shell": true,
-    // Choose the order of the modules
-    // Add according to your wishes: "custom/weather"
-    "modules-left": [
-        "hyprland/workspaces"
+  "layer": "top",
+  "position": "right",
+  "no-center": true,
+  "reload_style_on_change": true,
+  "width": 4,
+  "margin-left": 0,
+  "margin-right": 0,
+  "margin-top": 0,
+  "margin-bottom": 0,
+  "spacing": 0,
+  "gtk-layer-shell": true,
+  // Choose the order of the modules
+  // Add according to your wishes: "custom/weather"
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "backlight",
+    "idle_inhibitor",
+    "tray",
+    "battery",
+    "custom/batt_power",
+    "custom/toggle_dark_light",
+    "clock"
+  ],
+  // Modules configuration
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "all-outputs": true,
+    "sort-by-number": true,
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10",
+      "focused": "",
+      "default": ""
+    }
+  },
+  "hyprland/window": {
+    "justify": "center",
+    "format": "{}",
+    "icon": true,
+    "icon-size": 20
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰌵",
+      "deactivated": "󰌶"
+    },
+    "on-click": "exec ~/.config/hypr/scripts/idle_inhibitor.sh"
+  },
+  "tray": {
+    "icon-size": 20,
+    "spacing": 15
+  },
+  "clock": {
+    "format": "{:%H:%M\n%d/%m}",
+    "tooltip": false,
+    "on-click": "xdg-open https://calendar.google.com/"
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "<span size='x-large' font='FiraCode Nerd Font Mono'>{icon}</span>\n{percent}",
+    "format-icons": [
+      "",
+      "󰪞",
+      "󰪟",
+      "󰪠",
+      "󰪡",
+      "󰪢",
+      "󰪣",
+      "󰪤",
+      "󰪥"
     ],
-    "modules-right": [
-        "pulseaudio",
-        "backlight",
-        "idle_inhibitor",
-        "tray",
-        "battery",
-	"custom/batt_power",
-        "clock"
-    ],
-    // Modules configuration
-    "hyprland/workspaces": {
-        "format": "{icon}",
-        "on-click": "activate",
-        "all-outputs": true,
-        "sort-by-number": true,
-        "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "6": "6",
-            "7": "7",
-            "8": "8",
-            "9": "9",
-            "10": "10",
-            "focused": "",
-            "default": ""
-        },
+    "on-scroll-down": "brightnessctl -c backlight set 1%-",
+    "on-scroll-up": "brightnessctl -c backlight set +1%"
+  },
+  "battery": {
+    "justify": "center",
+    "on-click": "footclient battop",
+    "tooltip": false,
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
     },
-    "hyprland/window": {
-        "justify": "center",
-        "format": "{}",
-        "icon": true,
-        "icon-size": 20
+    "format": "{icon}\n{capacity}",
+    "format-plugged": "󰚥\n{capacity}",
+    //"format-icons": [
+    //    "",
+    //    "",
+    //    "",
+    //    "",
+    //    ""
+    //],
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ]
+  },
+  "custom/batt_power": {
+    "format": "{text}W",
+    "exec": "$HOME/.config/waybar/script/batt.sh",
+    "interval": 5
+  },
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "nwgbar",
+    "tooltip": false
+  },
+  "custom/toggle_dark_light": {
+    "format": "~UwU~",
+    "on-click": "exec darkman toggle"
+  },
+  "pulseaudio": {
+    "justify": "center",
+    "scroll-step": 3, // %, can be a float
+    "format": "{icon}\n{volume}",
+    "format-bluetooth": "{icon}\n{format_source}",
+    "format-bluetooth-muted": " {icon}\n{format_source}",
+    "format-muted": " \n{format_source}",
+    //"format-source": "{volume}% ",
+    //"format-source-muted": "",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "󰌵",
-            "deactivated": "󰌶",
-        },
-        "on-click": "exec ~/.config/hypr/scripts/idle_inhibitor.sh",
-    },
-    "tray": {
-        "icon-size": 20,
-        "spacing": 15
-    },
-    "clock": {
-        "format": "{:%H:%M\n%d/%m}",
-        "tooltip": false,
-        "on-click": "xdg-open https://calendar.google.com/"
-    },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "<span size='x-large' font='FiraCode Nerd Font Mono'>{icon}</span>\n{percent}",
-        "format-icons": [
-            "",
-            "󰪞",
-            "󰪟",
-            "󰪠",
-            "󰪡",
-            "󰪢",
-            "󰪣",
-            "󰪤",
-            "󰪥"
-        ],
-        "on-scroll-down": "brightnessctl -c backlight set 1%-",
-        "on-scroll-up": "brightnessctl -c backlight set +1%",
-    },
-    "battery": {
-        "justify": "center",
-        "on-click": "footclient battop",
-        "tooltip": false,
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon}\n{capacity}",
-        "format-plugged": "󰚥\n{capacity}",
-        //"format-icons": [
-        //    "",
-        //    "",
-        //    "",
-        //    "",
-        //    ""
-        //],
-        "format-icons": [
-            "󰂎",
-            "󰁺",
-            "󰁻",
-            "󰁼",
-            "󰁽",
-            "󰁾",
-            "󰁿",
-            "󰂀",
-            "󰂁",
-            "󰂂",
-            "󰁹"
-        ],
-    },
-    "custom/batt_power": {
-        "format": "{text}W",
-	"exec": "$HOME/.config/waybar/script/batt.sh",
-	"interval": 5,
-    },
-    "custom/power": {
-        "format": "⏻",
-        "on-click": "nwgbar",
-        "tooltip": false,
-    },
-    "pulseaudio": {
-        "justify": "center",
-        "scroll-step": 3, // %, can be a float
-        "format": "{icon}\n{volume}",
-        "format-bluetooth": "{icon}\n{format_source}",
-        "format-bluetooth-muted": " {icon}\n{format_source}",
-        "format-muted": " \n{format_source}",
-        //"format-source": "{volume}% ",
-        //"format-source-muted": "",
-        "format-source": "",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": [
-                "",
-                "",
-                ""
-            ]
-        },
-        "on-click": "pavucontrol",
-        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ -1%",
-        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ +1%",
-    },
+    "on-click": "pavucontrol",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ -1%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ +1%"
+  }
 }
